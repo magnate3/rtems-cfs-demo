@@ -190,7 +190,7 @@ $(TAR_IMAGE)::
 CCCFLAG ?=  --pipe  -Wall    -I/root/development/rtems/compiler_arm/6/arm-rtems6/xilinx_zynq_a9_qemu/lib/include -I ./inc -march=armv7-a -mthumb -mfpu=neon -mfloat-abi=hard -mtune=cortex-a9     -B/root/development/rtems/compiler_arm/6/arm-rtems6/xilinx_zynq_a9_qemu/lib -qrtems -Wl,--gc-sections   -march=armv7-a -mthumb -mfpu=neon -mfloat-abi=hard -mtune=cortex-a9
 $(EXE_TARGET): $(OBJS) $(TAR_IMAGE)
 	#$(COMPILER) --pipe  -Wall  $(DEBUG_FLAGS) $(LDFLAGS) $(FORCE_SYMBOLS)  -o $(EXE_TARGET_PRE) $(OBJS) $(TAR_IMAGE) $(LIBS)
-	#$(COMPILER) $(CCCFLAG)  -o $(EXE_TARGET_PRE) $(OBJS) $(TAR_IMAGE) $(LIBS)
+	$(COMPILER) $(CCCFLAG)  -o $(EXE_TARGET_PRE) $(OBJS) $(TAR_IMAGE) $(LIBS)
 	#$(RTEMS_SYMS) -v -e -c "-mcpu=cortex-a9 -ffunction-sections -fdata-sections -Wl,--gc-sections" -o dl-sym.o $(EXE_TARGET_PRE)
 	#$(COMPILER) $(DEBUG_FLAGS) $(LDFLAGS) $(FORCE_SYMBOLS) -o $(EXE_TARGET) $(OBJS) $(TAR_IMAGE) $(LIBS) dl-sym.o
 	#$(OBJCOPY) -O binary --strip-all $(EXE_TARGET) $(BINARY_TARGET)
